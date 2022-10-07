@@ -2,11 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   email: null,
-  id: null,
-  image: null,
-  name: null,
   password: null,
-  phoneNumber: null,
+  mobile: null,
 }
 
 const userInfoSlice = createSlice({
@@ -16,12 +13,9 @@ const userInfoSlice = createSlice({
     setUpdateUserInfo: (state, action) => {
       const res = action.payload
       const result = {
-        id: res.id,
-        image: res.image,
-        name: res.name,
-        password: res.password,
-        phoneNumber: res.phoneNumber,
         email: res.email,
+        password: res.password,
+        mobile: res.mobile,
       }
       return result
     },

@@ -1,5 +1,7 @@
 import './App.css'
-import { Route, Routes } from 'react-router-dom'
+import { useState } from 'react'
+import { Route, Routes, useNavigate } from 'react-router-dom'
+import axios from 'axios'
 import Header from './components/Header'
 import Service from './pages/Service'
 import Signup from './pages/Signup'
@@ -7,13 +9,26 @@ import Login from './pages/Login'
 import Mypage from './pages/Mypage'
 
 function App() {
+  const navigate = useNavigate()
+  const [isLogin, setIsLogin] = useState(false)
+
+  const logoutHandler = async () => {
+    await axios
+      .post('https://mycroft-test-api.herokuapp.com/logout', null)
+      .then((res) => {
+        console.log(res)
+        setIsLogin(false)
+        navigate('/')
+      })
+  }
+
   return (
     <>
-      <Header />
+      <Header isLogin={isLogin} logoutHandler={logoutHandler} />
       <Routes>
         <Route path="/" element={<Service />} />
         <Route path="/sign-up" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
         <Route path="/mypage/order" element={<Mypage />} />
       </Routes>
     </>

@@ -31,6 +31,10 @@
   color: #ff7235;
 }
 
+.input_error {
+  outline: 1px solid red;
+}
+
 .container button {
   background: #ff7235;
   border-radius: 4px;
@@ -38,7 +42,7 @@
   color: #ffffff;
   width: 148px;
   height: 48px;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 16px;
   cursor: pointer;
   font-family: 'Spoqa Han Sans Neo';

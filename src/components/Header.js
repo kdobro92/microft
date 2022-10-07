@@ -2,15 +2,14 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import styles from './Header.module.css'
 
-function Header() {
+function Header({ isLogin, logoutHandler }) {
   const [currentNav, setCurrentNav] = useState(0)
-  const [isLogin, setIsLogin] = useState(true)
 
   const onClickMenuHandler = (idx) => {
     setCurrentNav(idx)
   }
 
-  const data = [
+  const isLoggedOut = [
     <Link to="/">
       <li className={styles.nav_txt}>서비스</li>
     </Link>,
@@ -22,36 +21,34 @@ function Header() {
     </Link>,
   ]
 
-  // const newData = [
-  //   <Link to="/">
-  //     <div className="wrap_menu">
-  //       <li className="menu_txt">서비스</li>
-  //     </div>
-  //   </Link>,
-  //   <Link to="/mypage/order">
-  //     <div className="wrap_menu">
-  //       <li className="menu_txt">마이페이지</li>
-  //     </div>
-  //   </Link>,
-  //   <Link to="/logout">
-  //     <li className="menu_txt">로그아웃</li>
-  //   </Link>,
-  // ]
+  const isLoggedIn = [
+    <Link to="/">
+      <li className={styles.nav_txt}>서비스</li>
+    </Link>,
+    <Link to="/mypage/order">
+      <li className={styles.nav_txt}>마이페이지</li>
+    </Link>,
+    <li className={styles.nav_txt} onClick={logoutHandler}>
+      로그아웃
+    </li>,
+  ]
 
-  return (
-    <div className={styles.wrap_header}>
-      <div className={styles.container_header}>
-        <div className={styles.nav_left}>
-          <ul>
-            <li>
-              <img src="img/microft.png" alt="logo" />
-            </li>
-          </ul>
-        </div>
-        <div className={styles.nav_right}>
-          {isLogin && (
+  if (isLogin) {
+    return (
+      <div className={styles.wrap_header}>
+        <div className={styles.container_header}>
+          <Link to="/">
+            <div className={styles.nav_left}>
+              <ul>
+                <li>
+                  <img src="img/microft.png" alt="logo" />
+                </li>
+              </ul>
+            </div>
+          </Link>
+          <div className={styles.nav_right}>
             <div>
-              {data.map((menu, idx) => (
+              {isLoggedIn.map((menu, idx) => (
                 <ul
                   key={idx}
                   className={
@@ -64,7 +61,39 @@ function Header() {
                 </ul>
               ))}
             </div>
-          )}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className={styles.wrap_header}>
+      <div className={styles.container_header}>
+        <Link to="/">
+          <div className={styles.nav_left}>
+            <ul>
+              <li>
+                <img src="img/microft.png" alt="logo" />
+              </li>
+            </ul>
+          </div>
+        </Link>
+        <div className={styles.nav_right}>
+          <div>
+            {isLoggedOut.map((menu, idx) => (
+              <ul
+                key={idx}
+                className={
+                  currentNav === idx
+                    ? `${styles.nav_menu} ${styles.focused}`
+                    : `${styles.nav_menu}`
+                }
+                onClick={() => onClickMenuHandler(idx)}>
+                {menu}
+              </ul>
+            ))}
+          </div>
         </div>
       </div>
     </div>
