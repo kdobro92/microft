@@ -1,6 +1,6 @@
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
-import Header from './pages/Header'
+import Header from './components/Header'
 import Service from './pages/Service'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
@@ -12,9 +12,9 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Service />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/sign-up" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/mypage" element={<Mypage />} />
+        <Route path="/mypage/order" element={<Mypage />} />
       </Routes>
     </>
   )
