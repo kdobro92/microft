@@ -1,0 +1,22 @@
+.order_list div li {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  padding: 12px 8px 12px 32px;
+}
+
+.item_list {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid#f1f1f1;
+}
+
+.item_list li:nth-child(1) {
+  width: 16px;
+  font-weight: bold;
+}
+
+.item_list li:nth-child(2) {
+  width: 70px;
+  font-weight: bold;
+}

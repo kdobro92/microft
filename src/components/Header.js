@@ -41,7 +41,7 @@ function Header({ isLogin, logoutHandler }) {
             <div className={styles.nav_left}>
               <ul>
                 <li>
-                  <img src="img/microft.png" alt="logo" />
+                  <img src="/img/logo.png" alt="logo" />
                 </li>
               </ul>
             </div>
@@ -74,7 +74,7 @@ function Header({ isLogin, logoutHandler }) {
           <div className={styles.nav_left}>
             <ul>
               <li>
-                <img src="img/microft.png" alt="logo" />
+                <img src="/img/logo.png" alt="logo" />
               </li>
             </ul>
           </div>

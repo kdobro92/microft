@@ -7,16 +7,17 @@ import styles from './Signup.module.css'
 function Signup() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [rePassword, setRePassword] = useState('')
+  const [mobile, setMobile] = useState('')
   const [userIdError, setUserIdError] = useState(false)
   const [passwordError, setPasswordError] = useState(false)
   const [confirmPasswordError, setConfirmPasswordError] = useState(false)
 
-  const [inputValue, setInputValue] = useState({
-    email: '',
-    password: '',
-    rePassword: '',
-    mobile: '',
-  })
+  const onChangeMobile = (e) => {
+    setMobile(e.target.value)
+  }
 
   // focus
   const inputRef = useRef(null)
@@ -26,58 +27,43 @@ function Signup() {
   }, [])
 
   // 유저 정보 유효성 검사
-  const handleInput = (e) => {
-    const { name, value } = e.target
-    setInputValue({
-      ...inputValue,
-      [name]: value,
-    })
-
-    const isValidId = (value) => {
-      const userIdRegex =
-        /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
-      if (userIdRegex.test(value)) {
-        setUserIdError(false)
-      } else setUserIdError(true)
-    }
-    isValidId(value)
-
-    const isValidPwd = (value) => {
-      if (inputValue.password.length >= 7 && inputValue.password.length < 15) {
-        setPasswordError(false)
-      } else setPasswordError(true)
-    }
-    isValidPwd(value)
-
-    const isValidRePwd = (value) => {
-      if (inputValue.password === value) setConfirmPasswordError(false)
-      else setConfirmPasswordError(true)
-    }
-    isValidRePwd(value)
+  const isValidId = (e) => {
+    const userIdRegex =
+      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
+    if (userIdRegex.test(e.target.value)) {
+      setUserIdError(false)
+    } else setUserIdError(true)
+    setEmail(e.target.value)
   }
 
-  // const focusBlur = (e) => {
-  //   const checkData = errCheck(inputValue)
-  //   setErr(checkData)
-  // }
+  const isValidPwd = (e) => {
+    if (password.length >= 7 && password.length < 15) {
+      setPasswordError(false)
+    } else setPasswordError(true)
+    setPassword(e.target.value)
+  }
+
+  const isValidRePwd = (e) => {
+    if (password === e.target.value) setConfirmPasswordError(false)
+    else setConfirmPasswordError(true)
+    setRePassword(e.target.value)
+  }
 
   const validation = () => {
-    if (!inputValue.email) setUserIdError(true)
-    if (!inputValue.password) setPasswordError(true)
-    if (!inputValue.rePassword) setConfirmPasswordError(true)
+    if (!email) setUserIdError(true)
+    if (!password) setPasswordError(true)
+    if (!rePassword) setConfirmPasswordError(true)
   }
 
   // request to server
   const onSubmitHandler = async (e) => {
     e.preventDefault()
     if (validation()) return
-    if (Object.values(inputValue).includes('')) {
-      alert('모든 항목은 필수입니다.')
-    } else {
+    else {
       const data = {
-        email: inputValue.email,
-        password: inputValue.password,
-        mobile: inputValue.mobile,
+        email,
+        password,
+        mobile,
       }
       try {
         await axios
@@ -110,7 +96,7 @@ function Signup() {
           name="email"
           placeholder="이메일 형식"
           ref={inputRef}
-          onChange={handleInput}
+          onChange={isValidId}
           className={userIdError ? `${styles.input_error}` : null}
         />
         <label className={styles.input_txt}>
@@ -120,7 +106,7 @@ function Signup() {
           type="password"
           name="password"
           placeholder="8~15자"
-          onChange={handleInput}
+          onChange={isValidPwd}
           className={passwordError ? `${styles.input_error}` : null}
         />
         <label className={styles.input_txt}>
@@ -130,7 +116,7 @@ function Signup() {
           type="password"
           name="rePassword"
           placeholder="비밀번호 재입력"
-          onChange={handleInput}
+          onChange={isValidRePwd}
           className={confirmPasswordError ? `${styles.input_error}` : null}
         />
         <label className={styles.input_txt}>
@@ -140,7 +126,7 @@ function Signup() {
           type="text"
           name="mobile"
           placeholder="핸드폰 번호"
-          onChange={handleInput}
+          onChange={onChangeMobile}
         />
         <button type="submit">가입하기</button>
       </form>

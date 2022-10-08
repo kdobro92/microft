@@ -7,6 +7,7 @@ import Service from './pages/Service'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
 import Mypage from './pages/Mypage'
+import MypageDetail from './pages/MypageDetail'
 
 function App() {
   const navigate = useNavigate()
@@ -30,6 +31,7 @@ function App() {
         <Route path="/sign-up" element={<Signup />} />
         <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
         <Route path="/mypage/order" element={<Mypage />} />
+        <Route path="/mypage/order/:id" element={<MypageDetail />} />
       </Routes>
     </>
   )

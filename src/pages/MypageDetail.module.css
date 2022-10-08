@@ -1,0 +1,23 @@
+.wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.wrap h2 {
+  margin-top: 50px;
+  width: 70%;
+  border-bottom: 3px solid #f1f1f1;
+}
+
+.container {
+  border-bottom: 3px solid black;
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+  height: 100px;
+}

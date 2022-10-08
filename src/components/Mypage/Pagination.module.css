@@ -1,0 +1,33 @@
+.wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  background-color: #ffffff;
+  color: #ffffff;
+  width: 10px;
+  height: 10px;
+}
+
+.page_item {
+  /* background-color: #ffffff;
+  color: #222; */
+  cursor: pointer;
+}
+
+.page_btn {
+  display: flex;
+  justify-content: space-between;
+  width: 180px;
+}
+
+.page_btn button {
+  border: none;
+  margin-right: 20px;
+  width: 30px;
+  height: 30px;
+  background-color: lightgray;
+  border-radius: 4px;
+  cursor: pointer;
+}
